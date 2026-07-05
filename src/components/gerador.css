@@ -40,6 +40,9 @@ main form .gerator{
     border-radius: 0.6rem;
     padding: 5px;
 }
+.gerator input{
+    width: 200px;
+}
 main form a{
     display: flex;
     justify-content: center;
