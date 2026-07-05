@@ -14,29 +14,46 @@ function Gerador(){
     const [uppEstado, setUppEstado] = useState(false)
     const [lowEstado, setLowEstado] = useState(false)
 
+    const [strength, setStrength] = useState("")
+
     const [tam, setTam] = useState(0)
 
     const [senha, setSenha] = useState("Gere sua senha")
+
+    const [cor, setCor] = useState("")
+    
+
 
     function tamanho(e){
         setTam(e.target.value)
         console.log(e.target.value)
     }
 
-    function exibir(e){
-        // console.log(e.target.name)
-        // console.log(e.target.checked)
 
+    function handleCheckBox(e){
     
         if(e.target.name == "num") setNumEstado(e.target.checked) 
         if(e.target.name == "sym") setSymEstado(e.target.checked) 
         if(e.target.name == "upper") setUppEstado(e.target.checked) 
         if(e.target.name == "low") setLowEstado(e.target.checked)  
-        
-
-    
    
      }
+     
+     function passwordStrength(){
+        if(numEstado && lowEstado && uppEstado && symEstado){
+            setStrength("Senha Forte")
+            setCor("green")
+        }
+
+
+        if(!numEstado || !lowEstado || !uppEstado || !symEstado){
+            setStrength("Senha Fraca")
+            setCor("red")
+        }
+       
+        
+     }
+
 
     function gerarSenha(){
         const arr = []
@@ -77,10 +94,12 @@ function Gerador(){
         }
 
         setSenha(arr.join(""))
+
+        passwordStrength()
         
     }
 
-    
+
     return (
         <>
         <main>
@@ -92,20 +111,21 @@ function Gerador(){
                     <div className="gerator"><input type="text" value={senha}  />  <RotateCcw className="icon" onClick={gerarSenha} /> </div>
                     <a><Copy strokeWidth={2} /> copy</a>
                 </div>
+                <p style={{ color: cor, fontSize: "18px" }}>{strength}</p>
                 <div className="form_group password_size">
                     <p>Tamanho da senha:</p><input type="number" onChange={tamanho}/> 
                 </div>
                 <div className="form_group check">
-                    <p>Maiusculas</p><input type="checkbox" onChange={exibir}  name="upper" id="upp" /> 
+                    <p>Maiusculas</p><input type="checkbox" onChange={handleCheckBox}  name="upper" id="upp" /> 
                 </div>
                 <div className="form_group check">
-                    <p>Minusculas</p><input type="checkbox" onChange={exibir}  name="low" id="low" /> 
+                    <p>Minusculas</p><input type="checkbox" onChange={handleCheckBox}  name="low" id="low" /> 
                 </div>
                 <div className="form_group check">
-                    <p>Simbolos</p><input type="checkbox" onChange={exibir}  name="sym" id="sym" /> 
+                    <p>Simbolos</p><input type="checkbox" onChange={handleCheckBox}  name="sym" id="sym" /> 
                 </div>
                 <div className="form_group check">
-                    <p>Numeros</p><input type="checkbox" onChange={exibir}   name="num" id="num" /> 
+                    <p>Numeros</p><input type="checkbox" onChange={handleCheckBox}   name="num" id="num" /> 
                 </div>
                 
                 

@@ -12,6 +12,7 @@ main{
 
 main form{
     background: #ffffff;
+    width: 400px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -20,7 +21,7 @@ main form{
 }
 main form .form_group{
     display: flex;
-    gap: 2rem;
+    gap: 5px;
 }
 
 main form input {
